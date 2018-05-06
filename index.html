@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>create</title>
+	<style>
+		#avatar img {
+			width: 25vmax;
+			height: 25vmax;
+		}
+
+		body {
+			background: linear-gradient(to right, #000428, #004e92, #000428);
+		}
+
+		button {
+			background-color: "purple"
+		}
+
+		div {
+			text-align: center
+		}
+	</style>
+</head>
+<div>
+	<input type='text' name='name' placeholder='First and Last Name'>
+</div>
+<div>
+	<input type='text' name='username' placeholder='Username'>
+</div>
+<div>
+	<label>Avatar</label>
+	<input type='file' accept='image/*' name='avatar'>
+	<div id='avatar'></div>
+</div>
+<div>
+	<input type='password' name='password' placeholder='Password'>
+</div>
+<div>
+	<input type='password' name='verify' placeholder='Enter Password for Verification'>
+</div>
+<div>
+	<button>Submit</button>
+</div>
+<script>
+	var $inputs = document.querySelectorAll('input')
+	var $button = document.querySelector('button')
+	var $avatarInput = document.querySelector('input[name=avatar]');
+	var $preview = document.querySelector('#avatar');
+	var imageData;
+
+	function storeData() {
+		var data = {};
+		for (var i = 0; i < $inputs.length; i++) {
+			var $input = $inputs[i];
+			if($input.type === 'text' || $input.type === 'password'){
+				data[$input.name] = $input.value
+			}else if($input.type === 'file'){
+				data[$input.name] = imageData;
+			}
+		}
+		verifyPassword();
+		sendData(data);
+		window.open("./login")
+	}
+
+	function verifyPassword() {
+		var $passwords = document.querySelectorAll('input[type="password"]');
+		var $samePasswords = $passwords[0].value === $passwords[1].value
+		if (!$samePasswords) return alert('Passwords not matching')
+		return true
+	}
+
+	function sendData(data) {
+		// Creating a new request to the server that contains the data
+		var req = new XMLHttpRequest();
+		if (!data.username) return alert('Fill out all fields')
+		if (!imageData) return alert('Fill out all fields')
+		// Opening up a connection with the server to 'POST' data
+		req.open('POST', '/create', true);
+
+		// Explain to the server that we are sending the data in json format
+		req.setRequestHeader('content-type', 'application/json')
+		// Alert the user to any errors from the server
+		function readyStateChange() {
+			if (req.readyState !== 4) return;
+			if (req.status !== 200) return;
+			data = JSON.parse(req.responseText);
+			if (data.error) {
+				alert(data.error);
+			}
+			window.location.href = '/game'
+		}
+		req.onreadystatechange = readyStateChange;
+
+		// Sending the data in JSON format
+		req.send(JSON.stringify(data));
+	}
+
+
+	$button.addEventListener('click', storeData);
+	$avatarInput.addEventListener('change', previewAvatar);
+
+	function previewAvatar() {
+		var fileReader = new FileReader();
+		fileReader.onload = function(e) {
+			imageData = e.target.result;
+			var $img = document.createElement('img');
+			$img.src = imageData;
+			$preview.innerHTML = '';
+			$preview.appendChild($img)
+		}
+		fileReader.readAsDataURL($avatarInput.files[0]);
+	}
+</script>
+</body>
+
+</html>

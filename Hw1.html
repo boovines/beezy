@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Whitestorm</title>
+  <style>
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: green;
+}
+</style>
+</head>
+<body>
+  <div>
+    <label>What is your email?</label>
+    <input type='text' name='email'>
+  </div>
+  <div>
+    <label>What is your username?<label>
+    <input type='text' name='username'>
+  </div>
+  <div>
+    <label>What is your password?</label>
+    <input type='password' name='password'>
+  </div>
+  <div>
+    <input type='checkbox' name='terms' value='terms'>I have read and agree to the terms of service</input>
+  </div>
+  <div>
+    <form>
+      <input id='Button' type="button" value="Create Account" onclick="window.location.href='http://juno.wisen.space/thankyou.html'" />
+    </form>
+  </div>
+  <script>
+    var $inputs = document.querySelectorAll('input')
+    var $button = document.querySelector('button')
+    function storeData() {
+      var data = {};
+      for(var i=0; i < $inputs.length; i++){
+        var $input = $inputs[i];
+        data[$input.name]  = $input.value;
+      }
+      sendData(data);
+    }
+
+    function sendData(data) {
+      // Creating a new request to the server that contains the data
+      var req = new XMLHttpRequest();
+      // Opening up a connection with the server to 'POST' data
+        req.open('POST', '/hw1', true);
+      // Explain to the server that we are sending the data in json format
+        req.setRequestHeader('content-type', 'application/json')
+      // Sending the data in JSON format
+        req.send(JSON.stringify(data));
+      }
+
+      function redirect(){
+
+      }
+    var $button = document.querySelector('button')
+    $button.addEventListener('click', storeData);
+  </script>
+</body>

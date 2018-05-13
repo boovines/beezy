@@ -89,7 +89,7 @@
 	<script src='/js/socket.io.js'></script>
 	<script>
 		var user = '{{USER}}'
-		var socket = io()
+		var socket = io({query: {user: user})
 		var $canvas = document.querySelector('canvas');
 		$canvas.width = window.screen.width;
 		$canvas.height = window.screen.height;
@@ -114,6 +114,7 @@
 			$ul.appendChild($li);
 		});
 	</script>
+	<script src='/js/game.js'></script>
 </body>
 
 </html>

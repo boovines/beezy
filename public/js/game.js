@@ -20,7 +20,7 @@ function updatePlayers(players) {
   gamePiecesNames.forEach(function(gamePieceName) {
       if (!players[gamePieceName]) {
         deletegamePieces[gamePieceName];
-      });
+      }n;
   };
 
   console.log(players);

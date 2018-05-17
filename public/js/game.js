@@ -19,7 +19,7 @@ function updatePlayers(players) {
   var gamePiecesNames = Object.keys(gamePieces);
   gamePiecesNames.forEach(function(gamePieceName) {
       if (!players[gamePieceName]) {
-        deletegamePieces[gamePieceName];
+        delete gamePieces[gamePieceName];
       };
   });
 
@@ -55,7 +55,7 @@ function drawGamePiece() {
 function animate() {
   context.clearRect(0, 0, $canvas.width, $canvas.height);
   drawGamePiece();
-  window.reuestAnimationFrame(animate);
+  window.requestAnimationFrame(animate);
 }
 
 function updatePlayerPosition(e) {

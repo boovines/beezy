@@ -42,13 +42,17 @@ function createNewPlayer(playerName) {
 
 function drawGamePiece() {
   var playerNames = Object.keys(gamePieces);
-  var pieceWidth = Math.min($canvas.width, $canvas.height) / 25;
+  var pieceWidth = Math.min($canvas.width, $canvas.height) / 20;
   playerNames.forEach(function(playerName) {
     var gamePiece = gamePieces[playerName];
     if (!gamePiece.loaded) return;
     context.drawImage(
       gamePiece.avatar, gamePiece.x, gamePiece.y, pieceWidth, pieceWidth
     );
+    var c=document.getElementById("myCanvas");
+    var ctx=c.getContext("2d");
+    ctx.rect(gamePiece.x,gamePiece.y,pieceWidth,pieceWidth);
+    ctx.stroke();
   });
 }
 

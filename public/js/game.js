@@ -49,10 +49,8 @@ function drawGamePiece() {
     context.drawImage(
       gamePiece.avatar, gamePiece.x, gamePiece.y, pieceWidth, pieceWidth
     );
-    var c=document.getElementById("myCanvas");
-    var ctx=c.getContext("2d");
-    ctx.rect(gamePiece.x,gamePiece.y,pieceWidth,pieceWidth);
-    ctx.stroke();
+    context.rect(gamePiece.x,gamePiece.y,pieceWidth,pieceWidth);
+    context.stroke();
   });
 }
 

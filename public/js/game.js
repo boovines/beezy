@@ -1,5 +1,7 @@
 var context = $canvas.getContext('2d');
 var gamePieces = {};
+var zombiepoints = 0
+var humanpoints = 0
 
 socket.on('playerUpdate', updatePlayers);
 
@@ -8,6 +10,9 @@ function updatePlayers(players) {
   playerNames.forEach(function(playerName) {
     if (playerName === user) return;
     if (!gamePieces[playerName]) {
+      if(gamePiece.zombie){
+        return;
+      }
       createNewPlayer(playerName);
     }
     var player = players[playerName];
@@ -106,6 +111,7 @@ Object.keys(gamePieces).forEach(function(player) {
 
 function playerCollision() {
     mainPlayer.zombie = true;
+    zombiepoints = zombiepoints + 1
 };
 
 window.requestAnimationFrame(animate);

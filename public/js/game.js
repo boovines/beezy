@@ -54,13 +54,13 @@ function drawGamePiece() {
       context.linewidth = 10;
       context.rect(gamePiece.x-pieceWidth*0.25, gamePiece.y-pieceWidth*0.25, pieceWidth*1.5, pieceWidth*1.5)
       context.stroke();
-    }; else() {
+    } else {
       context.beginPath();
       context.strokeStyle = "yellow"
       context.linewidth = 10;
       context.rect(gamePiece.x-pieceWidth*0.25, gamePiece.y-pieceWidth*0.25, pieceWidth*1.5, pieceWidth*1.5)
       context.stroke();
-    }
+    };
   });
 }
 
@@ -94,6 +94,19 @@ function updatePlayerPosition(e) {
   });
 
 }
+
+var mainPlayer = gamePieces[user]
+Object.keys(gamePieces).forEach(function(player) {
+  if(player === user) return;
+  var otherPlayer = gamePieces[player];
+  if(collide(mainPlayer, otherPlayer)) {
+      playerCollision()
+  }
+})
+
+function playerCollision() {
+    mainPlayer.zombie = true;
+};
 
 window.requestAnimationFrame(animate);
 createNewPlayer(user);

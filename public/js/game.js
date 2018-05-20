@@ -7,9 +7,6 @@ function updatePlayers(players) {
   playerNames.forEach(function(playerName) {
     if (playerName === user) return;
     if (!gamePieces[playerName]) {
-      if(gamePiece.zombie){
-        return;
-      }
       createNewPlayer(playerName);
     }
     var player = players[playerName];

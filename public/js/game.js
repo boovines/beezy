@@ -51,6 +51,7 @@ function drawGamePiece() {
     if (gamePiece.zombie) {
       context.beginPath();
       context.strokeStyle = "green";
+      context.linewidth = 10
       context.rect(gamePiece.x-pieceWidth*0.25, gamePiece.y-pieceWidth*0.25, pieceWidth*1.5, pieceWidth*1.5)
       context.stroke();
     };

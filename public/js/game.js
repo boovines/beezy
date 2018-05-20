@@ -1,8 +1,5 @@
 var context = $canvas.getContext('2d');
 var gamePieces = {};
-var zombiepoints = 0
-var humanpoints = 0
-
 socket.on('playerUpdate', updatePlayers);
 
 function updatePlayers(players) {

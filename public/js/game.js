@@ -22,15 +22,14 @@ function updatePlayers(players) {
         delete gamePieces[gamePieceName];
       };
   });
-
-  console.log(players);
 }
 
 function createNewPlayer(playerName) {
   var gamePiece = {
     loaded: false,
-    x: 0,
-    y: 0
+    x: $canvas.width/2,
+    y: $canvas.height/2,
+    zombie: Object.keys(gamePieces).length === 0?true:false
   };
   gamePiece.avatar = new Image();
   gamePiece.avatar.onload = function() {
@@ -49,8 +48,12 @@ function drawGamePiece() {
     context.drawImage(
       gamePiece.avatar, gamePiece.x, gamePiece.y, pieceWidth, pieceWidth
     );
-    context.rect(gamePiece.x,gamePiece.y,pieceWidth,pieceWidth);
-    context.stroke();
+    if (gamePiece.zombie) {
+      context.beginPath();
+      context.strokeStyle = "green";
+      context.rect(gamePiece.x-pieceWidth*0.25, gamePiece.y-pieceWidth*0.25, pieceWidth*1.5, pieceWidth*1.5)
+      context.stroke();
+    };
   });
 }
 

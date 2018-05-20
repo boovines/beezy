@@ -51,10 +51,16 @@ function drawGamePiece() {
     if (gamePiece.zombie) {
       context.beginPath();
       context.strokeStyle = "green";
-      context.linewidth = 10
+      context.linewidth = 10;
       context.rect(gamePiece.x-pieceWidth*0.25, gamePiece.y-pieceWidth*0.25, pieceWidth*1.5, pieceWidth*1.5)
       context.stroke();
-    };
+    }; else() {
+      context.beginPath();
+      context.strokeStyle = "yellow"
+      context.linewidth = 10;
+      context.rect(gamePiece.x-pieceWidth*0.25, gamePiece.y-pieceWidth*0.25, pieceWidth*1.5, pieceWidth*1.5)
+      context.stroke();
+    }
   });
 }
 
@@ -86,6 +92,7 @@ function updatePlayerPosition(e) {
     x: gamePiece.x,
     y: gamePiece.y
   });
+
 }
 
 window.requestAnimationFrame(animate);

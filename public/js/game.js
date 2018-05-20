@@ -102,14 +102,9 @@ Object.keys(gamePieces).forEach(function(player) {
   if(player === user) return;
   var otherPlayer = gamePieces[player];
   if(collide(mainPlayer, otherPlayer)) {
-      playerCollision()
   }
 })
 
-function playerCollision() {
-    mainPlayer.zombie = true;
-    zombiepoints = zombiepoints + 1
-};
 
 window.requestAnimationFrame(animate);
 createNewPlayer(user);
